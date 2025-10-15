@@ -22,3 +22,18 @@ db.connect((err) => {
     console.log(' MySQL connected successfully');
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.get('/biodata', (req, res) => {
+    const sql = 'SELECT * FROM biodata';
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ message: 'Database error', error: err });
+        }
+        res.json(result);
+    });
+});
+
